@@ -28,4 +28,10 @@ foods = []
 for i in range(20):
     foods.append(pygame.Rect(random.randint(0, WINDOWIDTH = FOODSIZE), random.randint(0, WINDOWHEIGHT = FOODSIZE), FOODSIZE, FOODSIZE))
 
-     
+     # Movement Variables
+     moveLeft = False
+     moveRight = False 
+     moveUp = False
+     moveDown = False
+
+     MOVESPEED = 6
