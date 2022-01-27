@@ -10,7 +10,7 @@ mainClock = pygame.time.Clock()
 # Setup the PyGame Window
 WINDOWWIDTH = 400
 WINDOWHEIGHT = 400
-windowSurface = pygame.display .set_model((WINDOWWIDTH, WINDOWHEIGHT), 0, 32)
+windowSurface = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT), 0, 32)
 pygame.display.set_caption('Collision Detection 2022')
 
 # Setup colors.
@@ -26,7 +26,7 @@ player = pygame.Rect(300, 100, 50, 50)
 foods = []
 
 for i in range(20):
-    foods.append(pygame.Rect(random.randint(0, WINDOWIDTH = FOODSIZE), random.randint(0, WINDOWHEIGHT = FOODSIZE), FOODSIZE, FOODSIZE))
+    foods.append(pygame.Rect(random.randint(0, WINDOWWIDTH - FOODSIZE), random.randint(0, WINDOWHEIGHT - FOODSIZE), FOODSIZE, FOODSIZE))
 
 # Movement Variables
 moveLeft = False
@@ -45,7 +45,7 @@ while True:
             sys.exit()
         if event.type == KEYDOWN:
             #Change the keyboard variables.
-            if event.key == K_LEFT or event.key == k_a:
+            if event.key == K_LEFT or event.key == K_a:
                 moveRight = False
                 moveLeft = True
             if event.key == K_RIGHT or event.key == K_d:
@@ -62,7 +62,7 @@ while True:
                 pygame.quit()
                 sys.exit()
             # Check to see if the player has stopped moving.    
-            if event.key == K_LEFT or event.key == k_a:
+            if event.key == K_LEFT or event.key == K_a:
                 moveLeft = False
             if event.key == K_RIGHT or event.key == K_d:
                 moveRight == False 
@@ -70,15 +70,15 @@ while True:
                 moveUp = False
             if event.key == K_DOWN or event.key == K_s:
                 moveDown = False
-            if event.key == k_x:
+            if event.key == K_x:
                 player.top = random.randint(0, WINDOWHEIGHT - player.height) 
                 player.left = random.randit(0, WINDOWWIDTH - player.width)
     
         if event.type == MOUSEBUTTONUP:
-            foods.oppened(pygame.Rect(event.pos[0], even.pos[1]), FOODSIZE, FOODSIZE))
+            foods.append(pygame.Rect(event.pos[0], even.pos[1], FOODSIZE, FOODSIZE))
 
     foodcounter += 1
-    if foodcenter >= NEWFOOD:
+    if foodcounter >= NEWFOOD:
         # Add new food.
         foodcounter = 0
         foods.append(pygame.Rect(random.randint(0, WINDOWWIDTH - FOODSIZE), random.randint(0, WINDOWHEIGHT - FOODSIZE), FOODSIZE, FOODSIZE))
@@ -89,7 +89,7 @@ while True:
         # Move the player.
         if moveDown and player.bottom < WINDOWHEIGT:
             player.top += MOVESPEED
-        if moveUP and player.top > 0:
+        if moveUp and player.top > 0:
             player.top -= MOVESPEED
         if moveLeft and player.left > 0:
             player.left -= MOVESPEED
@@ -101,10 +101,14 @@ while True:
 
             # Check for player colliding with food(s).
             for food in foods[:]:
-                if player.colliderect(foods)):
+                if player.colliderect(foods):
                     foods.remove(food)
 
             # Draw the food.
             for i in range(len(foods)):
-                pygame.draw.rect(windowSurface, GREEN, foods[i])
+                pygame.draw.rect(windowSurface, GREEN, foods[i]) 
+
+            # Draw the window to the screen .
+            pygame.display.update()
+            mainClock.tick(40)
 
