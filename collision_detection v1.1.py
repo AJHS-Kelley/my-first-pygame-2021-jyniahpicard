@@ -78,7 +78,7 @@ while True:
             foods.oppened(pygame.Rect(event.pos[0], even.pos[1]), FOODSIZE, FOODSIZE))
 
     foodcounter += 1
-    if foodcenter => NEWFOOD:
+    if foodcenter >= NEWFOOD:
         # Add new food.
         foodcounter = 0
         foods.append(pygame.Rect(random.randint(0, WINDOWWIDTH - FOODSIZE), random.randint(0, WINDOWHEIGHT - FOODSIZE), FOODSIZE, FOODSIZE))
